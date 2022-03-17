@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        html,
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+        
+        .clearfix {
+            zoom: 1;
+        }
+        
+        .wrapper {
+            background: -webkit-linear-gradient(#98a2ad, #88909b);
+            background: linear-gradient(#98a2ad, #88909b);
+            height: 100vh;
+        }
+        
+        .out {
+            position: absolute;
+            width: 325px;
+            background-color: #fff;
+            text-align: center;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, .2);
+            z-index: 9;
+        }
+        
+        .top {
+            height: 60px;
+            background-color: #252a37;
+            padding: 0 15px;
+            display: flex;
+        }
+        
+        .top .left {
+            flex-grow: 1;
+        }
+        
+        .top .left h3 {
+            font-family: Lato, sans-serif;
+            margin-top: 20px;
+            color: #fff;
+            text-align: left;
+        }
+        
+        .top .right {
+            flex-grow: 1;
+            position: relative;
+        }
+        
+        .top .right ul {
+            position: absolute;
+            top: 85%;
+            right: -50px;
+            background-color: #fff;
+            z-index: 999;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: 1px solid #ddd;
+        }
+        
+        .top .right ul li {
+            padding: 10px 15px;
+            color: #777;
+            cursor: pointer;
+        }
+        
+        .top .right ul li+li {
+            border-top: 1px solid #ddd;
+        }
+        
+        .top .right ul li:hover {
+            background-color: #ddd;
+        }
+        
+        .top .right .nav-trigger {
+            position: absolute;
+            clip: rect(0, 0, 0, 0);
+        }
+        
+        .top .right label[for="nav-trigger"] {
+            display: block;
+            position: absolute;
+            top: 16px;
+            right: 0;
+            z-index: 999;
+            height: 21px;
+            width: 16px;
+            cursor: pointer;
+        }
+        
+        .top .right label[for="nav-trigger"] span {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: #888;
+            font-size: 0px;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-transition: background-color 0.3s;
+            transition: background-color 0.3s;
+        }
+        
+        .top .right label[for="nav-trigger"] span:before,
+        .top .right label[for="nav-trigger"] span:after {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #888;
+            content: '';
+            -webkit-transition: -webkit-transform 0.3s;
+            transition: transform 0.3s;
+        }
+        
+        .top .right label[for="nav-trigger"] span:after {
+            -webkit-transform: translateY(240%);
+            transform: translateY(240%);
+        }
+        
+        .top .right label[for="nav-trigger"] span:before {
+            -webkit-transform: translateY(-240%);
+            transform: translateY(-240%);
+        }
+        
+        .messagesWrap {
+            position: relative;
+            border: 1px solid #ccc;
+        }
+        
+        #messages {
+            height: 325px;
+            overflow: auto;
+            background: white;
+            padding: 10px;
+            margin: 0;
+            position: relative;
+        }
+        
+        #messages li {
+            list-style: none;
+            padding: 10px 0 25px;
+        }
+        
+        .people {}
+        
+        .people .img {
+            float: left;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+            background: #bbb;
+        }
+        
+        .people .img img {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .people .text {
+            margin-left: 60px;
+            position: relative;
+        }
+        
+        .people .text p {
+            margin: 0;
+            color: #777;
+            font-size: 14px;
+            text-align: left;
+        }
+        
+        .people .text .content {
+            float: left;
+            position: relative;
+        }
+        
+        .people .text .content p {
+            color: #333;
+            padding: 10px 15px;
+            background: #ebebeb;
+            border-radius: 20px;
+            margin: 5px 60px 0 10px;
+            position: relative;
+            z-index: 5;
+            word-break: break-all;
+            display: inline-block;
+        }
+        
+        .people .text .content p:before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            background: transparent;
+            box-shadow: 0 7px 0 2px #ebebeb;
+            top: -10px;
+            left: -6px;
+            z-index: -1;
+        }
+        
+        .people .text .content p.textimg {
+            background: none;
+            padding: 0;
+            max-width: 120px;
+            border-radius: 0;
+        }
+        
+        .people .text .content p.textimg img {
+            width: 100%;
+            height: auto;
+            vertical-align: bottom;
+            border-radius: 6px;
+        }
+        
+        .people .text .content p.textimg:before {
+            display: none;
+        }
+        
+        .people .text .content p.textimg a {
+            font-size: 12px;
+            color: #c0c0c0;
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .people .text .content p.textimg a:hover {
+            text-decoration: underline;
+        }
+        
+        .people .text .content .time {
+            font-size: 12px;
+            color: #c0c0c0;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+        }
+        
+        .people .text .content span.watch {
+            bottom: 16px;
+            right: 22px;
+        }
+        
+        .people.me .img,
+        .people.me .text>p {
+            display: none;
+        }
+        
+        .people.me .text .content {
+            float: right;
+        }
+        
+        .people.me .text .content p {
+            margin: 5px 10px 0 60px;
+            background: #c4f1a3;
+        }
+        
+        .people.me .text .content p:before {
+            box-shadow: 0 7px 0 2px #c4f1a3;
+            left: auto;
+            right: -6px;
+        }
+        
+        .people.me .text .content p.textimg {
+            background: none;
+        }
+        
+        .people.me .text .content p.textimg a {
+            left: auto;
+            right: 0;
+        }
+        
+        .people.me .text .content span {
+            right: auto;
+            left: 0;
+        }
+        
+        .people.me .text .content span.watch {
+            left: 22px;
+        }
+        
+        .chat {
+            margin: 0;
+        }
+        
+        .chat .nav {
+            display: flex;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+        }
+        
+        .chat .nav i {
+            padding: 5px 10px;
+            font-size: 20px;
+            color: #aaa;
+            cursor: pointer;
+        }
+        
+        .chat .nav i:hover {
+            color: #666;
+        }
+        
+        .chat .nav #mediaCapture {
+            display: none;
+        }
+        
+        .chat textarea {
+            width: 100%;
+            resize: none;
+            height: 80px;
+            font-size: 14px;
+            line-height: 18px;
+            padding: 2px 5px;
+            border: 1px solid #ccc;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            margin-bottom: -4px;
+        }
+        
+        .chat textarea:focus {
+            outline: 0;
+        }
+        
+        #modal {}
+        
+        .close {
+            padding: 0;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+            -webkit-appearance: none;
+            font-size: 22px;
+            line-height: 20px;
+            font-weight: bold;
+        }
+        
+        .modal-content {
+            position: fixed;
+            top: 10%;
+            left: 50%;
+            z-index: 9999;
+            width: 380px;
+            margin-left: -190px;
+            background-color: #fff;
+            border: 1px solid #999;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            -webkit-border-radius: 6px;
+            -moz-border-radius: 6px;
+            border-radius: 6px;
+            outline: 0;
+            -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+            -webkit-background-clip: padding-box;
+            -moz-background-clip: padding-box;
+            background-clip: padding-box;
+        }
+        
+        .modal-header {
+            padding: 15px 15px 0;
+            /*border-bottom: 1px solid #eee;*/
+            text-align: center;
+        }
+        
+        .modal-header button.close {
+            float: right;
+            opacity: .25;
+            filter: alpha(opacity=20);
+            color: #000;
+            text-shadow: 0 1px 0 #fff;
+        }
+        
+        .modal-header h4 {
+            font-size: 24px;
+            margin: 10px 0;
+            color: #777;
+        }
+        
+        .modal-body {
+            position: relative;
+            max-height: 400px;
+            padding: 15px 15px 40px;
+            overflow-y: auto;
+            text-align: center;
+            font-size: 16px;
+        }
+        
+        .modal-body div {
+            width: 290px;
+            margin: auto;
+        }
+        
+        .modal-body div input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 10px;
+            background-color: #fff;
+            font-size: 16px;
+            border-top-left-radius: 6px;
+            border-top-right-radius: 6px;
+            border: 1px solid #ccc;
+        }
+        
+        .modal-body div input:nth-child(2) {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 6px;
+            border-bottom-right-radius: 6px;
+            border-top: none;
+        }
+        
+        .modal-body div input:-webkit-autofill {
+            background-color: #fff;
+            background-image: none;
+            color: #777;
+        }
+        
+        .modal-body div #login_error {
+            width: 100%;
+            text-align: left;
+            margin-top: 10px;
+            color: #c82323;
+            font-size: 12px;
+        }
+        
+        .modal-body div button {
+            width: 48%;
+            float: left;
+            border: none;
+            padding: 10px;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+            margin-top: 10px;
+            background-color: #efa53e;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .modal-body div button#login {
+            float: right;
+        }
+        
+        .modal-body div a {
+            display: inline-block;
+            font-weight: normal;
+            text-decoration: none;
+            padding-bottom: 0;
+            margin-top: 10px;
+            background-color: #4760a5;
+            color: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            height: 35px;
+            line-height: 33px;
+            width: 100%;
+            -moz-border-radius: 2px;
+            -webkit-border-radius: 2px;
+            border-radius: 2px;
+        }
+        
+        .modal-body div a:nth-child(6) {
+            margin-top: 20px;
+        }
+        
+        .modal-body div span {
+            font-size: 14px;
+            color: #777;
+            text-align: left;
+            display: block;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        
+        .modal-footer {
+            padding: 14px 15px 15px;
+            margin-bottom: 0;
+            text-align: right;
+            background-color: #f5f5f5;
+            border-top: 1px solid #ddd;
+            -webkit-border-radius: 0 0 6px 6px;
+            -moz-border-radius: 0 0 6px 6px;
+            border-radius: 0 0 6px 6px;
+            -webkit-box-shadow: inset 0 1px 0 #fff;
+            -moz-box-shadow: inset 0 1px 0 #fff;
+            box-shadow: inset 0 1px 0 #fff;
+        }
+        
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 9998;
+            background-color: #000;
+            opacity: .8;
+        }
+        
+        #modal-content02.modal-content {
+            top: -60%;
+        }
+        
+        #modal-content02 .modal-body div button {
+            width: 100%;
+        }
+        
+        #modal-content02 .modal-body div input {
+            border-radius: 6px;
+        }
+        
+        #modal-content02 .modal-body div #login_error02 {
+            width: 100%;
+            text-align: left;
+            margin-top: 10px;
+            color: #c82323;
+            font-size: 12px;
+        }
+        
+        #moreimgBox {
+            width: 300px;
+            background-color: #252a37;
+            position: absolute;
+            top: 0;
+            box-shadow: 1px 2px 5px rgba(0, 0, 0, .2);
+            z-index: 999;
+        }
+        
+        #moreimgBox ul {
+            height: 250px;
+            background-color: #fff;
+            padding: 15px 15px 20px;
+            margin: 30px 0 0;
+            box-sizing: border-box;
+            border-left: 1px solid #ccc;
+            border-right: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            flex-flow: row wrap;
+            align-content: flex-start;
+        }
+        
+        #moreimgBox ul li {
+            list-style: none;
+            flex: 1 33.3%;
+            cursor: pointer;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+        
+        #moreimgBox ul li img {
+            width: 100%;
+            height: auto;
+        }
+        
+        #moreimgBox .close {
+            position: absolute;
+            color: #888;
+            right: 10px;
+            top: 5px;
+        }
+    </style>
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div id="wrapper" class="wrapper">
+        <div id="out" class="out" style="left: calc(100%/2); top: 74px;">
+            <div id="top" class="top">
+                <div class="left">
+                    <h3>firebase chat</h3>
+                </div>
+                <div class="right">
+                    <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+                    <label id="triggers" for="nav-trigger">
+		    <span>Menu</span>
+		</label>
+                    <ul id="triggersUl" hidden="true">
+                        <li id="lioutlogin">登出</li>
+                        <li id="showImage">顯示圖片</li>
+                        <li id="bgSetup">背景設定</li>
+                        <li id="uplondImage">上傳圖片</li>
+                        <!--<li id="lilogin" onclick="login();">登入</li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="messagesWrap">
+                <ul id="messages"></ul>
+            </div>
+            <form action="" class="chat">
+                <div class="nav">
+                    <div class="one">
+                        <i id="moreImage" class="fa fa-meh-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="two">
+                        <input id="mediaCapture" type="file" accept="image/*,capture=camera">
+                        <i id="submitImage" class="fa fa-paperclip" aria-hidden="true"></i>
+                    </div>
+                </div>
+                <textarea id='messageInput' placeholder='Type a message...'></textarea>
+            </form>
+        </div>
+        <div id="moreimgBox" hidden="true" style="left: calc(100%/2 - 320px); top: 77px;">
+            <button id="moreimgClose" class="close">×</button>
+            <ul id="moreimgBoxUl"></ul>
+        </div>
+        <!--<div class="text">-->
+        <!--<p>1.物件可拖移</p>-->
+        <!--</div>-->
+    </div>
+    <div id="modal" hidden="true">
+        <div class="modal-backdrop"></div>
+        <div id='modal-content01' class="modal-content">
+            <div class="modal-header">
+                <!--<button id="accountClose" class="close">×</button>-->
+                <h4>帳號登入</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <input type="email" id="useEmail" placeholder="電郵地址" />
+                    <input type="password" id="usePassword" placeholder="密碼" />
+                    <div id="login_error"></div>
+                    <button type="submit" id="login">登入</button>
+                    <button type="submit" id="register">註冊</button>
+                    <a id='fblogin' class="btn02">使用Facebook帳號登入</a>
+                    <a id='googlelogin' class="btn02">使用Google帳號登入</a>
+                    <span id="forgetPassword">忘記密碼?</span>
+                </div>
+            </div>
+        </div>
+        <div id='modal-content02' class="modal-content">
+            <div class="modal-header">
+                <button id="close" class="close">×</button>
+                <h4>輸入信箱</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <input type="email" id="email02" placeholder="電郵地址" />
+                    <div id="login_error02"></div>
+                    <button type="submit" id="send">送出</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/3.2.0/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script>
+        // 初始化 Firebase
+        var config = {
+            apiKey: "AIzaSyBz6lZ19M-xprH6tID3TCJGnafwF3bdBFI",
+            authDomain: "kingtest-f51ef.firebaseapp.com",
+            databaseURL: "https://kingtest-f51ef.firebaseio.com",
+            storageBucket: "kingtest-f51ef.appspot.com",
+            messagingSenderId: "894681617426"
+        };
+        firebase.initializeApp(config);
+
+        function chat() {
+            this.messageInput = document.getElementById('messageInput');
+            this.messages = document.getElementById('messages');
+            this.trigger = document.getElementById('trigger');
+            this.navtrigger = document.getElementById('navtrigger');
+            this.lioutlogin = document.getElementById('lioutlogin');
+            this.modal = document.getElementById('modal');
+            this.template = document.getElementById('template');
+            this.fblogin = document.getElementById('fblogin');
+            this.googlelogin = document.getElementById('googlelogin');
+            this.register = document.getElementById('register');
+            this.login = document.getElementById('login');
+            this.useEmail = document.getElementById('useEmail');
+            this.usePassword = document.getElementById('usePassword');
+            this.loginError = document.getElementById('login_error');
+            this.navtrigger = document.getElementById('nav-trigger');
+            this.forgetPassword = document.getElementById("forgetPassword");
+            this.send = document.getElementById("send");
+            this.email02 = document.getElementById("email02");
+            this.loginerror02 = document.getElementById("login_error02");
+            this.close = document.getElementById("close");
+            this.submitImageButton = document.getElementById('submitImage');
+            this.uplondImage = document.getElementById('uplondImage');
+            this.mediaCapture = document.getElementById('mediaCapture');
+            this.moreImage = document.getElementById('moreImage');
+            this.showImage = document.getElementById('showImage');
+            this.moreimgBox = document.getElementById('moreimgBox');
+            this.moreimgBoxUl = document.getElementById('moreimgBoxUl');
+            this.moreimgClose = document.getElementById('moreimgClose');
+            this.triggers = document.getElementById('triggers');
+            this.triggersUl = document.getElementById('triggersUl');
+            this.out = document.getElementById('out');
+            this.wrapper = document.getElementById('wrapper');
+            this.auth = firebase.auth();
+            this.database = firebase.database();
+            this.storage = firebase.storage();
+            this.messagesRef = this.database.ref('message');
+            this.displayName;
+            this.getuserEmail;
+            this.photoURL;
+            this.file;
+            this.loginIf();
+            //auto
+            // this.useEmail.value, this.usePassword.value
+            this.useEmail.value = 'sstudentr900@yahoo.com.tw';
+            this.usePassword.value = 'sstudentr900';
+            //送出訊息
+            this.messageInput.addEventListener('keypress', this.messageInputFn.bind(this));
+            //outlogin
+            this.lioutlogin.addEventListener('click', this.lioutloginFn.bind(this));
+            //fb登入
+            this.fblogin.addEventListener('click', this.fbloginFn.bind(this));
+            //註冊
+            this.register.addEventListener('click', this.registerFn.bind(this));
+            //google登入
+            this.googlelogin.addEventListener('click', this.googleloginFn.bind(this));
+            //登入
+            this.login.addEventListener('click', this.loginFn.bind(this));
+            //忘記密碼
+            this.forgetPassword.addEventListener('click', this.forgetPasswordFn.bind(this));
+            //關信箱視窗
+            this.close.addEventListener('click', this.closeFn.bind(this));
+            //上傳圖片
+            this.submitImageButton.onclick = this.uplondImage.onclick = function() {
+                this.mediaCapture.click();
+            }.bind(this)
+            this.mediaCapture.addEventListener('change', this.saveImageMessage.bind(this));
+            //貼圖
+            this.showImage.onclick = this.moreImage.onclick = this.moreimgClose.onclick = function() {
+                    this.moreImageFn();
+                }.bind(this)
+                //拖移
+            this.out.addEventListener('mousedown', this.moveFn.bind(this.out));
+            this.moreimgBox.addEventListener('mousedown', this.moveFn.bind(this.moreimgBox));
+            //選單
+            this.triggers.addEventListener('click', this.triggersFn.bind(this));
+        }
+
+        //判斷有無登入
+        chat.prototype.loginIf = function() {
+            this.auth.onAuthStateChanged(this.onAuthStateChanged.bind(this));
+        }
+        chat.prototype.onAuthStateChanged = function(user) {
+                if (user) {
+                    if (user.providerData[0].displayName == null) {
+                        this.displayName = user.email.split('@')[0];
+                    } else {
+                        this.displayName = user.providerData[0].displayName;
+                    }
+                    if (user.providerData[0].photoURL == null) {
+                        this.photoURL = 'img/01.jpg';
+                    } else {
+                        this.photoURL = user.providerData[0].photoURL;
+                    }
+                    this.getuserEmail = user.email;
+                    this.lioutlogin.removeAttribute('hidden');
+                    this.modal.setAttribute('hidden', 'true');
+                    //this.triggersUl.setAttribute('hidden','true');
+                    this.moreimgBoxUl.innerHTML = '';
+                    this.loadMessages();
+                } else {
+                    this.lioutlogin.setAttribute('hidden', 'true');
+                    this.modal.removeAttribute('hidden');
+                }
+            }
+            //讀入資料
+        chat.prototype.loadMessages = function() {
+            this.messagesRef.off();
+            var setMessage = function(data) {
+                var val = data.val();
+                this.displayMessage(data.key, val.name, val.text, val.photoURL, val.imageUrl, val.time, val.email, val.imagetype);
+            }.bind(this);
+            this.messagesRef.limitToLast(12).on('child_added', setMessage);
+            this.messagesRef.limitToLast(12).on('child_changed', setMessage);
+
+            //讀入貼圖
+            this.database.ref('image').on('child_added', function(data) {
+                var val = data.val().imgurl;
+                var createli = document.createElement('li');
+                var images = document.createElement('img');
+                images.onclick = function() {
+                    this.messagesRef.push({
+                        name: this.displayName,
+                        photoURL: this.photoURL,
+                        time: this.time(),
+                        email: this.getuserEmail,
+                        imageUrl: val,
+                        imagetype: 'no'
+                    })
+                }.bind(this);
+                this.storage.refFromURL(val).getMetadata().then(function(metadata) {
+                    images.src = metadata.downloadURLs[0];
+                    images.addEventListener('load', function() {
+                        this.moreimgBoxUl.appendChild(createli).appendChild(images);
+                    }.bind(this));
+                }.bind(this));
+            }.bind(this));
+        };
+        chat.prototype.displayMessage = function(key, name, text, photoURL, imageUri, time, email, imagetype) {
+            var div = document.getElementById(key);
+            if (!div) {
+                var container = document.createElement('li');
+                container.innerHTML =
+                    '<div class="people">' +
+                    '<div class="img"><img class="headimg"></div>' +
+                    '<div class="text clearfix"><p class="name"></p>' +
+                    '<div class="content"><p class="contenttext"></p>' +
+                    '<span class="time"></span>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+                div = container;
+                div.setAttribute('id', key);
+            }
+            var contenttext = div.querySelector('.contenttext');
+            var images = document.createElement('img');
+            var imgdownlond = document.createElement('a');
+            if (text) {
+                contenttext.textContent = text;
+            } else {
+                contenttext.className = 'contenttext textimg';
+                images.src = chat.LOADING_IMAGE_URL;
+                if (imageUri.startsWith('gs://')) {
+                    this.storage.refFromURL(imageUri).getMetadata().then(function(metadata) {
+                        imgdownlond.setAttribute('id', 'download');
+                        imgdownlond.setAttribute('href', metadata.downloadURLs[0]);
+                        imgdownlond.setAttribute('download', metadata.downloadURLs[0]);
+                        imgdownlond.innerHTML = '下載';
+                        images.src = metadata.downloadURLs[0];
+                        images.addEventListener('load', function() {
+                            this.messages.scrollTop = this.messages.scrollHeight;
+                            if (imagetype == 'yes') {
+                                contenttext.appendChild(imgdownlond);
+                            }
+                        }.bind(this));
+                    });
+                }
+                contenttext.innerHTML = '';
+                contenttext.appendChild(images);
+            }
+            div.querySelector('.name').textContent = name;
+            div.querySelector('.time').textContent = time;
+            div.querySelector('.headimg').src = photoURL;
+            //console.log(container)
+            if (this.getuserEmail == email) {
+                div.querySelector('.people').className = 'people me';
+            } else {
+                div.querySelector('.people').className = 'people';
+            }
+            this.img();
+            this.messageInput.innerHTML = '';
+            this.messageInput.focus();
+            this.messages.appendChild(div);
+            this.messages.scrollTop = this.messages.scrollHeight;
+        };
+        //置中圖片
+        chat.prototype.img = function(e) {
+                var imgdefereds = [];
+                $('.headimg').each(function() {
+                    var dfd = $.Deferred();
+                    $(this).bind('load', function() {
+                        dfd.resolve();
+                    }).bind('error', function() {
+                        //图片加载错误，加入错误处理
+                        // dfd.resolve();
+                    })
+                    if (this.complete) setTimeout(function() {
+                        dfd.resolve();
+                    }, 1000);
+                    imgdefereds.push(dfd);
+                })
+                $.when.apply(null, imgdefereds).done(function() {
+                    $('.headimg').each(function() {
+                        var ww = 50,
+                            wh = 50,
+                            iw = $(this).width(),
+                            ih = $(this).height(),
+                            scale = Math.max(ww / iw, wh / ih),
+                            sw = Math.floor(iw * scale),
+                            sh = Math.floor(ih * scale),
+                            moveX = Math.floor((ww - sw) / 2),
+                            moveY = Math.floor((wh - sh) / 2);
+                        //console.log('iw='+ iw +',ih=' + ih +'scale' + scale)
+                        $(this).css({
+                            width: sw,
+                            height: sh,
+                            left: moveX,
+                            top: moveY,
+                            opacity: 1
+                        });
+                    });
+                });
+            }
+            //送出訊息
+        chat.prototype.messageInputFn = function(e) {
+                if (e.keyCode == 13) {
+                    console.log(this.time());
+                    var message = {
+                        name: this.displayName,
+                        text: this.messageInput.value,
+                        photoURL: this.photoURL,
+                        time: this.time(),
+                        email: this.getuserEmail
+                    }
+                    this.messagesRef.push(message).then(function() {
+                        this.messageInput.value = '';
+                    }.bind(this)).catch(function(error) {
+                        console.log(error);
+                    });
+                }
+            }
+            //當前時間
+        chat.prototype.time = function(e) {
+                var now = new Date;
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var time, timetext;
+                if (now.getHours() > 12) {
+                    hours = parseInt(now.getHours() - 12);
+                    timetext = '下午';
+                } else {
+                    hours = now.getHours();
+                    timetext = '上午'
+                }
+                time = timetext + hours + ':' + minutes;
+                return time;
+            }
+            //outlogin
+        chat.prototype.lioutloginFn = function() {
+                this.auth.signOut();
+            }
+            //fb登入
+        chat.prototype.fbloginFn = function() {
+                var provider = new firebase.auth.FacebookAuthProvider();
+                this.auth.signInWithPopup(provider);
+                this.modal.removeAttribute('hidden');
+                this.loginError.innerHTML = '';
+            }
+            //google登入
+        chat.prototype.googleloginFn = function() {
+                var provider = new firebase.auth.GoogleAuthProvider();
+                this.auth.signInWithPopup(provider);
+                this.modal.removeAttribute('hidden');
+                this.loginError.innerHTML = '';
+            }
+            //登入
+        chat.prototype.loginFn = function() {
+                this.auth.signInWithEmailAndPassword(this.useEmail.value, this.usePassword.value).catch(function(error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    this.loginErrorFn(errorCode);
+                }.bind(this));
+                this.modal.removeAttribute('hidden');
+                this.loginError.innerHTML = '';
+            }
+            //註冊
+        chat.prototype.registerFn = function() {
+                this.auth.createUserWithEmailAndPassword(this.useEmail.value, this.usePassword.value).then(function(result) {
+                    this.login_error.innerHTML = '成功，請按登入';
+                }.bind(this), function(error) {
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    this.loginErrorFn(errorCode);
+                }.bind(this));
+                this.modal.removeAttribute('hidden');
+                this.loginError.innerHTML = '';
+            }
+            //忘記密碼
+        chat.prototype.forgetPasswordFn = function() {
+                $('#modal-content01').animate({
+                    top: "-60%"
+                }, function() {
+                    $('#modal-content02').animate({
+                        top: "10%"
+                    });
+                });
+                this.send.addEventListener("click", function() {
+                    firebase.auth().sendPasswordResetEmail(this.email02.value).then(function() {
+                        this.email02.value = "";
+                        setTimeout(this.modal.removeAttribute('hidden'), 5000);
+                    }.bind(this), function(error) {
+                        if (error.code == 'auth/invalid-email') {
+                            this.loginerror02.innerHTML = '信箱錯誤';
+                        } else if (error.code == 'auth/user-not-found') {
+                            this.loginerror02.innerHTML = '沒有此信箱';
+                        } else if (error.code == 'auth/internal-error') {
+                            this.loginerror02.innerHTML = '請重新送出';
+                        } else {
+                            console.log(error);
+                        }
+                    }.bind(this));
+                }.bind(this), false);
+            }
+            //錯誤訊息
+        chat.prototype.loginErrorFn = function(errorCode) {
+                if (errorCode == 'auth/invalid-email') {
+                    this.loginError.innerHTML = '信箱錯誤';
+                } else if (errorCode == 'auth/weak-password') {
+                    this.loginError.innerHTML = '密碼最少要6位數';
+                } else if (errorCode == 'auth/user-not-found') {
+                    this.loginError.innerHTML = '沒有此信箱';
+                } else if (errorCode == 'auth/email-already-in-use') {
+                    this.loginError.innerHTML = '信箱已存在';
+                } else if (errorCode == 'auth/wrong-password') {
+                    this.loginError.innerHTML = '信箱錯誤';
+                } else if (errorCode == 'auth/account-exists-with-different-credential') {
+                    this.loginError.innerHTML = '信箱已存在';
+                } else {
+                    console.log(errorCode);
+                }
+            }
+            //關信箱視窗
+        chat.prototype.closeFn = function() {
+                $('#modal-content02').animate({
+                    top: "-60%"
+                }, function() {
+                    $('#modal-content01').animate({
+                        top: "10%"
+                    });
+                });
+            }
+            //上傳圖片
+        chat.LOADING_IMAGE_URL = 'https://www.google.com/images/spin-32.gif';
+        chat.prototype.saveImageMessage = function(event) {
+                var file = event.target.files[0];
+                this.file = file;
+                if (!file.type.match('image.*')) {
+                    alert('檔案錯誤')
+                    return;
+                }
+                var currentUser = this.auth.currentUser;
+                this.messagesRef.push({
+                    name: this.displayName,
+                    photoURL: this.photoURL,
+                    time: this.time(),
+                    email: this.getuserEmail,
+                    imageUrl: chat.LOADING_IMAGE_URL,
+                    imagetype: 'yes'
+                }).then(function(data) {
+                    this.storage.ref(currentUser.uid + '/' + Date.now() + '/' + file.name).put(file, {
+                            contentType: file.type
+                        })
+                        .then(function(snapshot) {
+                            var filePath = snapshot.metadata.fullPath;
+                            data.update({
+                                imageUrl: this.storage.ref(filePath).toString()
+                            });
+                        }.bind(this))
+                        .catch(function(error) {
+                            console.error('There was an error uploading a file to Firebase Storage:', error);
+                        });
+                }.bind(this));
+            }
+            //貼圖open
+        chat.prototype.moreImageFn = function(event) {
+                if (this.moreimgBox.hidden == true) {
+                    this.moreimgBox.removeAttribute('hidden');
+                } else {
+                    this.moreimgBox.setAttribute('hidden', 'true');
+                }
+            }
+            //視窗移動
+        chat.prototype.moveFn = function(ev) {
+                var othis = this;
+                var oevent = ev || event;
+                var dinx = oevent.clientX - othis.offsetLeft;
+                var diny = oevent.clientY - othis.offsetTop;
+                document.onmousemove = function(ev) {
+                    var oevent = ev || event;
+                    var i = oevent.clientX - dinx;
+                    var t = oevent.clientY - diny;
+                    if (i < 0) {
+                        i = 0;
+                    } else if (i > document.documentElement.clientWidth - othis.offsetWidth) {
+                        i = document.documentElement.clientWidth - othis.offsetWidth;
+                    }
+                    if (t < 0) {
+                        t = 0;
+                    } else if (t > document.documentElement.clientHeight - othis.offsetHeight) {
+                        t = document.documentElement.clientHeight - othis.offsetHeight;
+                    }
+                    othis.style.left = i + 'px';
+                    othis.style.top = t + 'px';
+                }
+                document.onmouseup = function(ev) {
+                    document.onmousemove = null;
+                    document.onmouseup = null;
+                }
+            }
+            //選單
+        chat.prototype.triggersFn = function(ev) {
+            if (!this.triggersUl.hidden) {
+                this.triggersUl.setAttribute('hidden', 'true');
+            } else {
+                this.triggersUl.removeAttribute('hidden');
+                this.triggersUl.onmouseleave = this.triggersUl.onclick = function() {
+                    this.triggersUl.setAttribute('hidden', 'true');
+                }.bind(this);
+            }
+        }
+        window.onload = function() {
+            new chat();
+        }
+    </script>
+</body>
+
+</html>
